@@ -1,0 +1,260 @@
+<div class="pt-24 pb-20 bg-white">
+  <!-- Header -->
+  <section class="container mx-auto px-6 mb-16">
+    <div class="text-center max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+        Digital Store
+      </h1>
+      <p class="text-xl text-neutral-600 leading-relaxed">
+        Premium digital assets, templates, and resources created with care.
+        Everything you need to accelerate your projects and boost productivity.
+      </p>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="container mx-auto px-6 mb-12">
+    <div class="flex flex-wrap justify-center gap-4">
+      <button
+        (click)="filterByCategory('')"
+        [class.bg-primary-600]="selectedCategory() === ''"
+        [class.text-white]="selectedCategory() === ''"
+        [class.bg-neutral-200]="selectedCategory() !== ''"
+        [class.text-neutral-700]="selectedCategory() !== ''"
+        class="px-6 py-2 rounded-full font-medium transition-colors hover:bg-primary-600 hover:text-white"
+      >
+        All
+      </button>
+      <button
+        (click)="filterByCategory('templates')"
+        [class.bg-primary-600]="selectedCategory() === 'templates'"
+        [class.text-white]="selectedCategory() === 'templates'"
+        [class.bg-neutral-200]="selectedCategory() !== 'templates'"
+        [class.text-neutral-700]="selectedCategory() !== 'templates'"
+        class="px-6 py-2 rounded-full font-medium transition-colors hover:bg-primary-600 hover:text-white"
+      >
+        Templates
+      </button>
+      <button
+        (click)="filterByCategory('ui-kits')"
+        [class.bg-primary-600]="selectedCategory() === 'ui-kits'"
+        [class.text-white]="selectedCategory() === 'ui-kits'"
+        [class.bg-neutral-200]="selectedCategory() !== 'ui-kits'"
+        [class.text-neutral-700]="selectedCategory() !== 'ui-kits'"
+        class="px-6 py-2 rounded-full font-medium transition-colors hover:bg-primary-600 hover:text-white"
+      >
+        UI Kits
+      </button>
+      <button
+        (click)="filterByCategory('icons')"
+        [class.bg-primary-600]="selectedCategory() === 'icons'"
+        [class.text-white]="selectedCategory() === 'icons'"
+        [class.bg-neutral-200]="selectedCategory() !== 'icons'"
+        [class.text-neutral-700]="selectedCategory() !== 'icons'"
+        class="px-6 py-2 rounded-full font-medium transition-colors hover:bg-primary-600 hover:text-white"
+      >
+        Icons
+      </button>
+      <button
+        (click)="filterByCategory('courses')"
+        [class.bg-primary-600]="selectedCategory() === 'courses'"
+        [class.text-white]="selectedCategory() === 'courses'"
+        [class.bg-neutral-200]="selectedCategory() !== 'courses'"
+        [class.text-neutral-700]="selectedCategory() !== 'courses'"
+        class="px-6 py-2 rounded-full font-medium transition-colors hover:bg-primary-600 hover:text-white"
+      >
+        Courses
+      </button>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section
+    *ngIf="featuredAssets.length > 0"
+    class="container mx-auto px-6 mb-20"
+  >
+    <h2 class="text-2xl font-bold text-neutral-900 mb-8">Featured</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div
+        *ngFor="let asset of featuredAssets()"
+        class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer"
+        [routerLink]="['/store', asset.slug]"
+      >
+        <div
+          class="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden relative"
+        >
+          <img
+            *ngIf="asset.featured_image; else placeholderImage"
+            [src]="asset.featured_image"
+            [alt]="asset.title"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <ng-template #placeholderImage>
+            <div class="w-full h-full flex items-center justify-center">
+              <div class="text-primary-600 text-4xl">📦</div>
+            </div>
+          </ng-template>
+          <div
+            class="absolute top-4 right-4 bg-primary-600 text-white px-2 py-1 rounded text-sm font-medium"
+          >
+            Featured
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-2">
+            <span
+              class="px-3 py-1 bg-neutral-100 text-neutral-600 rounded-full text-sm"
+            >
+              {{ asset.category }}
+            </span>
+            <span class="text-lg font-bold text-primary-600"
+              >${{ asset.price }}</span
+            >
+          </div>
+          <h3
+            class="text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors"
+          >
+            {{ asset.title }}
+          </h3>
+          <p class="text-neutral-600 mb-4 line-clamp-2">
+            {{ asset.description }}
+          </p>
+          <div
+            class="flex items-center justify-between text-sm text-neutral-500"
+          >
+            <span>{{ asset.file_type }}</span>
+            <span *ngIf="asset.file_size">{{ asset.file_size }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Products -->
+  <section class="container mx-auto px-6">
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-2xl font-bold text-neutral-900">
+        {{
+          selectedCategory()
+            ? getCategoryDisplayName(selectedCategory())
+            : "All Products"
+        }}
+      </h2>
+      <div class="flex items-center space-x-4">
+        <select
+          (change)="onSortChange($event)"
+          class="px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        >
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="name">Name A-Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="text-center py-12">
+      <div
+        class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"
+      ></div>
+      <p class="mt-4 text-neutral-600">Loading products...</p>
+    </div>
+
+    <div
+      *ngIf="!loading && filteredAssets.length === 0"
+      class="text-center py-12"
+    >
+      <div class="text-6xl mb-4">🛍️</div>
+      <h3 class="text-xl font-semibold text-neutral-900 mb-2">
+        No products found
+      </h3>
+      <p class="text-neutral-600">Check back soon for new digital assets!</p>
+    </div>
+
+    <div
+      *ngIf="!loading && filteredAssets.length > 0"
+      class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+    >
+      <div
+        *ngFor="let asset of filteredAssets()"
+        class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer"
+        [routerLink]="['/store', asset.slug]"
+      >
+        <div
+          class="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden"
+        >
+          <img
+            *ngIf="asset.featured_image; else placeholderImage"
+            [src]="asset.featured_image"
+            [alt]="asset.title"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <ng-template #placeholderImage>
+            <div class="w-full h-full flex items-center justify-center">
+              <div class="text-primary-600 text-4xl">📦</div>
+            </div>
+          </ng-template>
+        </div>
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span
+              class="px-2 py-1 bg-neutral-100 text-neutral-600 rounded text-xs"
+            >
+              {{ asset.category }}
+            </span>
+            <span class="text-lg font-bold text-primary-600"
+              >${{ asset.price }}</span
+            >
+          </div>
+          <h3
+            class="font-bold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors line-clamp-2"
+          >
+            {{ asset.title }}
+          </h3>
+          <p class="text-neutral-600 text-sm mb-3 line-clamp-2">
+            {{ asset.description }}
+          </p>
+          <div
+            class="flex items-center justify-between text-xs text-neutral-500"
+          >
+            <span>{{ asset.file_type }}</span>
+            <span *ngIf="asset.file_size">{{ asset.file_size }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-primary-600 to-primary-700 mt-20">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h3 class="text-3xl font-bold text-white mb-4">
+        Looking for Something Custom?
+      </h3>
+      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+        Need a bespoke solution tailored to your specific requirements? Let's
+        discuss your project.
+      </p>
+      <a
+        routerLink="/contact"
+        class="bg-white text-primary-600 hover:bg-neutral-100 px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center"
+      >
+        Get in Touch
+        <svg
+          class="w-4 h-4 ml-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"
+          ></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+</div>
