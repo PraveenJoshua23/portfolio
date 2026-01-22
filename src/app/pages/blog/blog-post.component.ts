@@ -270,59 +270,60 @@ interface TableOfContentsItem {
 
       <!-- Related Posts -->
       @if (relatedPosts().length > 0) {
-      <section class="py-16 bg-neutral-50">
+      <section class="py-24 bg-neutral-50">
         <div class="container mx-auto px-6">
           <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-neutral-900 mb-12 text-center">
+            <h2 class="text-3xl font-bold text-neutral-900 mb-12 text-center tracking-tight">
               Related Posts
             </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               @for (relatedPost of relatedPosts(); track relatedPost.slug) {
               <article
-                class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
+                class="group cursor-pointer flex flex-col h-full"
               >
                 <div
-                  class="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden"
+                  class="relative overflow-hidden rounded-2xl bg-white aspect-video mb-6 border border-neutral-200 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1"
                 >
                   @if (relatedPost.featured_image) {
                   <img
                     [src]="getImageUrl(relatedPost.featured_image)"
                     [alt]="relatedPost.title"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
                   />
                   } @else {
-                  <div class="w-full h-full flex items-center justify-center">
-                    <div class="text-primary-600 text-4xl">📝</div>
+                  <div class="w-full h-full flex items-center justify-center bg-neutral-50">
+                    <span class="text-4xl">📝</span>
                   </div>
                   }
+                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
                 </div>
-                <div class="p-6">
-                  <div class="flex items-center text-sm text-neutral-500 mb-3">
+                
+                <div class="space-y-3 flex-1 flex flex-col">
+                  <div class="flex items-center text-sm text-neutral-500 font-medium space-x-2">
                     <time [dateTime]="relatedPost.date_created">
                       {{ formatDate(relatedPost.date_created) }}
                     </time>
                     @if (relatedPost.reading_time) {
-                    <span class="mx-2">•</span>
+                    <span>•</span>
                     <span>{{ relatedPost.reading_time }} min read</span>
                     }
                   </div>
-                  <h3
-                    class="text-xl font-bold text-neutral-900 mb-3 group-hover:text-primary-600 transition-colors"
-                  >
-                    <a [routerLink]="['/blog', relatedPost.slug]">{{
-                      relatedPost.title
-                    }}</a>
+                  
+                  <h3 class="text-xl font-bold text-neutral-900 group-hover:text-primary-600 transition-colors line-clamp-2">
+                    <a [routerLink]="['/blog', relatedPost.slug]">{{ relatedPost.title }}</a>
                   </h3>
-                  <p class="text-neutral-600 mb-4 line-clamp-3">
+                  
+                  <p class="text-neutral-600 leading-relaxed line-clamp-3 mb-4 flex-1">
                     {{ relatedPost.excerpt }}
                   </p>
+                  
                   <a
                     [routerLink]="['/blog', relatedPost.slug]"
-                    class="text-primary-600 hover:text-primary-700 font-medium text-sm inline-flex items-center"
+                    class="inline-flex items-center gap-2 text-neutral-900 font-medium hover:text-primary-600 transition-colors group/link mt-auto"
                   >
                     Read more
                     <svg
-                      class="w-4 h-4 ml-1"
+                      class="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -344,23 +345,32 @@ interface TableOfContentsItem {
       </section>
       }
 
-      <!-- Newsletter Signup -->
-      <section class="bg-gradient-to-r from-primary-600 to-primary-700">
-        <div class="container mx-auto px-6 py-16 text-center">
-          <h3 class="text-3xl font-bold text-white mb-4">Stay Updated</h3>
-          <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-            Get notified when I publish new articles about development, design,
-            and technology insights.
+      <!-- Newsletter Signup (Dark Theme) -->
+      <section class="py-32 relative overflow-hidden bg-neutral-900">
+        <!-- Background Effects -->
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+                <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary-600/20 rounded-full blur-[100px] animate-pulse"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-secondary-600/20 rounded-full blur-[100px] animate-pulse" style="animation-delay: 2s"></div>
+            </div>
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-20"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center">
+          <h3 class="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">Stay in the Loop</h3>
+          <p class="text-xl text-neutral-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+            Get notified when I publish new articles about development, design, and technology insights.
           </p>
+          
           <form class="max-w-md mx-auto flex gap-4">
             <input
               type="email"
               placeholder="Enter your email"
-              class="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600"
+              class="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent backdrop-blur-sm transition-all"
             />
             <button
               type="submit"
-              class="bg-white text-primary-600 hover:bg-neutral-100 px-8 py-3 rounded-lg font-medium transition-colors"
+              class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary-600/30"
             >
               Subscribe
             </button>
