@@ -19,23 +19,23 @@ export const routes: Routes = [
   //     path: 'projects/:slug',
   //     loadComponent: () => import('./pages/project-detail/project-detail.component').then(m => m.ProjectDetailComponent)
   //   },
-  {
-    path: 'blog',
-    loadComponent: () =>
-      import('./pages/blog/blog.component').then((m) => m.BlogComponent),
-  },
-  {
-    path: 'blog/:slug',
-    loadComponent: () =>
-      import('./pages/blog/blog-post.component').then(
-        (m) => m.BlogPostComponent
-      ),
-  },
-  {
-    path: 'store',
-    loadComponent: () =>
-      import('./pages/store/store.component').then((m) => m.StoreComponent),
-  },
+  // {
+  //   path: 'blog',
+  //   loadComponent: () =>
+  //     import('./pages/blog/blog.component').then((m) => m.BlogComponent),
+  // },
+  // {
+  //   path: 'blog/:slug',
+  //   loadComponent: () =>
+  //     import('./pages/blog/blog-post.component').then(
+  //       (m) => m.BlogPostComponent
+  //     ),
+  // },
+  // {
+  //   path: 'store',
+  //   loadComponent: () =>
+  //     import('./pages/store/store.component').then((m) => m.StoreComponent),
+  // },
   //   {
   //     path: 'store/:slug',
   //     loadComponent: () =>
@@ -47,7 +47,7 @@ export const routes: Routes = [
     path: 'contact',
     loadComponent: () =>
       import('./pages/contact/contact.component').then(
-        (m) => m.ContactComponent
+        (m) => m.ContactComponent,
       ),
   },
   {

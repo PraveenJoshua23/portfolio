@@ -18,13 +18,17 @@ import { CommonModule } from '@angular/common';
             routerLink="/"
             class="text-xl font-bold text-neutral-900 hover:text-primary-600 transition-colors flex items-center gap-2"
           >
-            <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center text-white text-sm">PJ</div>
+            <img
+              src="mascot.png"
+              alt="Praveen Joshua"
+              class="w-8 h-8 rounded-lg object-contain"
+            />
             <span class="hidden sm:block">Praveen Joshua</span>
           </a>
 
           <!-- Desktop Navigation -->
           <div class="hidden md:flex items-center space-x-1">
-            <a
+            <!-- <a
               routerLink="/"
               routerLinkActive="bg-white shadow-sm text-primary-600"
               [routerLinkActiveOptions]="{ exact: true }"
@@ -45,8 +49,8 @@ import { CommonModule } from '@angular/common';
               class="px-4 py-2 rounded-full text-sm font-medium text-neutral-600 hover:text-primary-600 hover:bg-white/50 transition-all"
             >
               Projects
-            </a>
-            <a
+            </a> -->
+            <!-- <a
               routerLink="/blog"
               routerLinkActive="bg-white shadow-sm text-primary-600"
               class="px-4 py-2 rounded-full text-sm font-medium text-neutral-600 hover:text-primary-600 hover:bg-white/50 transition-all"
@@ -59,7 +63,7 @@ import { CommonModule } from '@angular/common';
               class="px-4 py-2 rounded-full text-sm font-medium text-neutral-600 hover:text-primary-600 hover:bg-white/50 transition-all"
             >
               Store
-            </a>
+            </a> -->
           </div>
 
           <!-- CTA & Mobile Toggle -->

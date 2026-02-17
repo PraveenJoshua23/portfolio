@@ -78,11 +78,11 @@ import { CommonModule } from '@angular/common';
                 class="block text-neutral-400 hover:text-white transition-colors"
                 >Projects</a
               >
-              <a
+              <!-- <a
                 routerLink="/blog"
                 class="block text-neutral-400 hover:text-white transition-colors"
                 >Blog</a
-              >
+              > -->
               <a
                 routerLink="/contact"
                 class="block text-neutral-400 hover:text-white transition-colors"
@@ -95,11 +95,11 @@ import { CommonModule } from '@angular/common';
           <div>
             <h4 class="font-semibold mb-4">Services</h4>
             <nav class="space-y-3">
-              <a
+              <!-- <a
                 routerLink="/store"
                 class="block text-neutral-400 hover:text-white transition-colors"
                 >Digital Store</a
-              >
+              > -->
               <a
                 href="#"
                 class="block text-neutral-400 hover:text-white transition-colors"
