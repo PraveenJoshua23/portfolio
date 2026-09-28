@@ -45,7 +45,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Raleway", "system-ui", "sans-serif"],
+        sans: ["Inter Tight", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "Menlo", "Monaco", "monospace"],
       },
       animation: {

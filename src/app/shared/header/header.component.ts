@@ -1,153 +1,113 @@
 // components/header/header.component.ts
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { Component, DestroyRef, afterNextRender, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+const timeFmt = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Asia/Kolkata',
+  hour: '2-digit',
+  minute: '2-digit',
+});
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule],
+  imports: [RouterLink],
   template: `
     <header
-      class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl rounded-full bg-white/70 backdrop-blur-xl border border-white/40 shadow-lg shadow-neutral-200/10 transition-all duration-300"
+      class="fixed inset-x-0 top-0 z-50 bg-white/85 backdrop-blur-md text-[13px] font-semibold uppercase tracking-tight text-neutral-950"
     >
-      <nav class="px-6 py-3">
-        <div class="flex items-center justify-between">
-          <!-- Logo -->
-          <a
-            routerLink="/"
-            class="text-xl font-bold text-neutral-900 hover:text-primary-600 transition-colors flex items-center gap-2"
-          >
-            <img
-              src="mascot.png"
-              alt="Praveen Joshua"
-              class="w-8 h-8 rounded-lg object-contain"
-            />
-            <span class="hidden sm:block">Praveen Joshua</span>
-          </a>
+      <nav
+        class="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 md:px-8"
+      >
+        <a routerLink="/" (click)="menuOpen.set(false)" class="flex items-center gap-2">
+          <img src="mascot.png" alt="" width="28" height="28" class="h-7 w-7" />
+          <span>Praveen Joshua</span>
+        </a>
 
-          <!-- Desktop Navigation -->
-          <div class="hidden md:flex items-center space-x-1">
-            <!-- <a
-              routerLink="/"
-              routerLinkActive="bg-white shadow-sm text-primary-600"
-              [routerLinkActiveOptions]="{ exact: true }"
-              class="px-4 py-2 rounded-full text-sm font-medium text-neutral-600 hover:text-primary-600 hover:bg-white/50 transition-all"
-            >
-              Home
-            </a>
-            <a
-              routerLink="/about"
-              routerLinkActive="bg-white shadow-sm text-primary-600"
-              class="px-4 py-2 rounded-full text-sm font-medium text-neutral-600 hover:text-primary-600 hover:bg-white/50 transition-all"
-            >
-              About
-            </a>
-            <a
-              routerLink="/projects"
-              routerLinkActive="bg-white shadow-sm text-primary-600"
-              class="px-4 py-2 rounded-full text-sm font-medium text-neutral-600 hover:text-primary-600 hover:bg-white/50 transition-all"
-            >
-              Projects
-            </a> -->
-            <!-- <a
-              routerLink="/blog"
-              routerLinkActive="bg-white shadow-sm text-primary-600"
-              class="px-4 py-2 rounded-full text-sm font-medium text-neutral-600 hover:text-primary-600 hover:bg-white/50 transition-all"
-            >
-              Blog
-            </a>
-            <a
-              routerLink="/store"
-              routerLinkActive="bg-white shadow-sm text-primary-600"
-              class="px-4 py-2 rounded-full text-sm font-medium text-neutral-600 hover:text-primary-600 hover:bg-white/50 transition-all"
-            >
-              Store
-            </a> -->
-          </div>
+        <span class="hidden tabular-nums md:block" aria-label="Local time in Chennai">
+          CHN / IND — {{ time() }}
+        </span>
 
-          <!-- CTA & Mobile Toggle -->
-          <div class="flex items-center gap-4">
-            <a
-              routerLink="/contact"
-              class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 rounded-full transition-all hover:shadow-lg hover:-translate-y-0.5"
-            >
-              Let's Talk
-            </a>
+        <ul class="hidden items-center gap-6 md:flex">
+          @for (link of links; track link.label; let last = $last) {
+            <li class="flex items-center gap-6">
+              @if (link.external) {
+                <a [href]="link.href" target="_blank" rel="noopener" class="hover:underline underline-offset-4">
+                  {{ link.label }} ↗
+                </a>
+              } @else {
+                <a [routerLink]="link.href" [fragment]="link.fragment" class="hover:underline underline-offset-4">
+                  {{ link.label }}
+                </a>
+              }
+              @if (!last) {
+                <span aria-hidden="true" class="h-1 w-1 rounded-full bg-neutral-950"></span>
+              }
+            </li>
+          }
+        </ul>
 
-            <!-- Mobile Menu Button -->
-            <button
-              (click)="toggleMobileMenu()"
-              [attr.aria-label]="mobileMenuOpen ? 'Close menu' : 'Open menu'"
-              [attr.aria-expanded]="mobileMenuOpen"
-              class="md:hidden p-2 rounded-full hover:bg-neutral-100 transition-colors"
-            >
-              <svg
-                class="w-6 h-6 text-neutral-700"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  [attr.d]="
-                    mobileMenuOpen
-                      ? 'M6 18L18 6M6 6l12 12'
-                      : 'M4 6h16M4 12h16M4 18h16'
-                  "
-                ></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Mobile Navigation Overlay -->
-        <div
-          *ngIf="mobileMenuOpen"
-          class="absolute top-full left-0 right-0 mt-4 p-4 bg-white/90 backdrop-blur-xl rounded-3xl border border-white/20 shadow-xl md:hidden animate-fade-in-up origin-top"
+        <button
+          type="button"
+          class="uppercase md:hidden"
+          (click)="menuOpen.set(!menuOpen())"
+          [attr.aria-expanded]="menuOpen()"
+          aria-controls="mobile-menu"
         >
-          <div class="flex flex-col space-y-2">
-            <a
-              routerLink="/"
-              routerLinkActive="bg-primary-50 text-primary-600"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="closeMobileMenu()"
-              class="px-4 py-3 rounded-xl text-neutral-700 hover:bg-neutral-50 transition-colors font-medium"
-            >
-              Home
-            </a>
-            <a
-              routerLink="/contact"
-              (click)="closeMobileMenu()"
-              class="px-4 py-3 rounded-xl text-neutral-700 hover:bg-neutral-50 transition-colors font-medium"
-            >
-              Contact
-            </a>
-            <a
-              href="https://nuecrea.com"
-              target="_blank"
-              rel="noopener"
-              class="px-4 py-3 rounded-xl bg-neutral-900 text-white text-center font-medium mt-2"
-            >
-              Nuecrea ↗
-            </a>
-          </div>
-        </div>
+          {{ menuOpen() ? 'Close' : 'Menu' }}
+        </button>
       </nav>
+
+      @if (menuOpen()) {
+        <div
+          id="mobile-menu"
+          class="flex h-[calc(100dvh-4rem)] flex-col justify-between bg-white px-4 pb-8 md:hidden"
+        >
+          <ul class="space-y-1 pt-6">
+            @for (link of links; track link.label) {
+              <li>
+                @if (link.external) {
+                  <a [href]="link.href" target="_blank" rel="noopener" class="block text-6xl font-black leading-none tracking-tighter">
+                    {{ link.label }} ↗
+                  </a>
+                } @else {
+                  <a
+                    [routerLink]="link.href"
+                    [fragment]="link.fragment"
+                    (click)="menuOpen.set(false)"
+                    class="block text-6xl font-black leading-none tracking-tighter"
+                  >
+                    {{ link.label }}
+                  </a>
+                }
+              </li>
+            }
+          </ul>
+          <span class="tabular-nums">CHN / IND — {{ time() }}</span>
+        </div>
+      }
     </header>
   `,
-  styles: [],
 })
 export class HeaderComponent {
-  mobileMenuOpen = false;
+  readonly links = [
+    { label: 'Work', href: '/', fragment: 'work' },
+    { label: 'About', href: '/', fragment: 'about' },
+    { label: 'Nuecrea', href: 'https://nuecrea.com', external: true },
+    { label: 'Contact', href: '/contact' },
+  ];
 
-  toggleMobileMenu() {
-    this.mobileMenuOpen = !this.mobileMenuOpen;
-  }
+  menuOpen = signal(false);
+  // Empty on the server so prerendered HTML never shows a stale build-time clock.
+  time = signal('');
 
-  closeMobileMenu() {
-    this.mobileMenuOpen = false;
+  constructor() {
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const tick = () => this.time.set(timeFmt.format(new Date()));
+      tick();
+      const id = setInterval(tick, 15_000);
+      destroyRef.onDestroy(() => clearInterval(id));
+    });
   }
 }

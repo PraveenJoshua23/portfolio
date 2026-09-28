@@ -1,101 +1,88 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule],
+  imports: [RouterLink],
   template: `
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-neutral-50">
-      <!-- Abstract Background Elements -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-primary-100/40 blur-3xl animate-float-slow"></div>
-        <div class="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full bg-secondary-100/30 blur-3xl animate-float-slower"></div>
-      </div>
+    <section class="mx-auto max-w-[1600px] px-4 pb-12 pt-24 md:px-8 md:pt-28">
+      <h1
+        class="overflow-hidden text-[clamp(4rem,20.5vw,22rem)] font-black uppercase leading-[0.8] tracking-[-0.06em] text-neutral-950"
+      >
+        <span class="block rise">Praveen</span><span class="sr-only"> Joshua</span>
+      </h1>
 
-      <!-- Main Content -->
-      <div class="relative z-10 container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center">
-          <!-- Intro Tag -->
-          <div class="inline-block mb-6 opacity-0 animate-fade-in-up" style="animation-delay: 0.1s;">
-            <span class="px-4 py-2 rounded-full bg-white border border-neutral-200 text-neutral-600 text-sm font-medium shadow-sm">
-              👋 Hello, I'm Praveen Joshua
-            </span>
-          </div>
-
-          <!-- Main Heading -->
-          <h1 class="text-5xl md:text-7xl font-bold text-neutral-900 tracking-tight mb-8 opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">
-            Building digital <br class="hidden md:block" />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-secondary-500 to-primary-600 animate-gradient bg-300%">
-              experiences
-            </span>
-            that matter.
-          </h1>
-
-          <!-- Subheading -->
-          <p class="text-xl md:text-2xl text-neutral-600 font-light mb-12 max-w-2xl mx-auto leading-relaxed opacity-0 animate-fade-in-up" style="animation-delay: 0.3s;">
-            Software engineer, designer and founder of Nuecrea, crafting intuitive, performant, and beautiful digital products.
+      <div class="mt-8 grid items-end gap-8 md:mt-10 md:grid-cols-12">
+        <div class="md:col-span-7 fade" style="animation-delay: 0.35s">
+          <p
+            class="text-4xl font-medium leading-[1.02] tracking-tight text-neutral-950 md:text-6xl"
+          >
+            Building digital experiences that matter.
           </p>
-
-          <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0 animate-fade-in-up" style="animation-delay: 0.4s;">
-            <button (click)="scrollToProjects()" 
-              class="group relative px-8 py-4 bg-neutral-900 text-white rounded-full font-medium overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5">
-              <span class="relative z-10">View My Work</span>
-              <div class="absolute inset-0 bg-neutral-800 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-            </button>
-            
-            <button (click)="scrollToContact()" 
-              class="group px-8 py-4 bg-white text-neutral-900 border border-neutral-200 rounded-full font-medium transition-all hover:border-neutral-400 hover:shadow-md">
-              Let's Connect
-            </button>
-          </div>
+          <p class="mt-6 max-w-md text-lg leading-snug text-neutral-600">
+            Software engineer, designer and founder of Nuecrea, crafting
+            intuitive, performant, and beautiful digital products.
+          </p>
         </div>
+
+        <figure
+          class="relative z-10 w-3/5 md:col-span-4 md:col-start-9 md:-mt-[6vw] md:w-auto fade"
+          style="animation-delay: 0.5s"
+        >
+          <div class="group aspect-square overflow-hidden bg-[#F1ECE3]">
+            <img
+              src="mascot.png"
+              alt="Illustrated avatar of Praveen Joshua"
+              width="501"
+              height="501"
+              class="h-full w-full object-contain p-[12%] transition-transform duration-700 ease-out group-hover:-rotate-3 group-hover:scale-105"
+            />
+          </div>
+          <figcaption class="mt-3 text-[13px] font-semibold uppercase leading-tight">
+            Praveen Joshua<br />
+            <span class="text-neutral-500">Founder, Nuecrea</span>
+          </figcaption>
+        </figure>
       </div>
 
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in" style="animation-delay: 1s;">
-        <div class="w-[1px] h-16 bg-gradient-to-b from-neutral-300 to-transparent"></div>
+      <div
+        class="mt-12 flex items-center justify-between text-[13px] font-semibold uppercase fade"
+        style="animation-delay: 0.65s"
+      >
+        <a routerLink="/" fragment="about" class="underline underline-offset-4">
+          Learn more about me
+        </a>
+        <a routerLink="/" fragment="work">(Scroll)</a>
       </div>
     </section>
   `,
-  styles: [`
-    @keyframes float-slow {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(20px, 20px); }
-    }
-    @keyframes float-slower {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(-30px, -20px); }
-    }
-    @keyframes fade-in-up {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .animate-float-slow {
-      animation: float-slow 8s ease-in-out infinite;
-    }
-    .animate-float-slower {
-      animation: float-slower 12s ease-in-out infinite;
-    }
-    .animate-fade-in-up {
-      animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    .animate-fade-in {
-      animation: fade-in 1s ease-out forwards;
-    }
-  `]
+  styles: [
+    `
+      .rise {
+        animation: rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      .fade {
+        animation: fade 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      @keyframes rise {
+        from {
+          transform: translateY(100%);
+        }
+      }
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(1.5rem);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .rise,
+        .fade {
+          animation: none;
+        }
+      }
+    `,
+  ],
 })
-export class HeroComponent {
-  scrollToProjects() {
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  scrollToContact() {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  }
-}
+export class HeroComponent {}
