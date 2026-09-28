@@ -34,7 +34,7 @@ import { CommonModule } from '@angular/common';
 
           <!-- Subheading -->
           <p class="text-xl md:text-2xl text-neutral-600 font-light mb-12 max-w-2xl mx-auto leading-relaxed opacity-0 animate-fade-in-up" style="animation-delay: 0.3s;">
-            Software Engineer & Designer crafting intuitive, performant, and beautiful web solutions.
+            Software engineer, designer and founder of Nuecrea, crafting intuitive, performant, and beautiful digital products.
           </p>
 
           <!-- CTA Buttons -->

@@ -1,13 +1,12 @@
 // pages/home/home.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { HeroComponent } from './hero.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, HeroComponent],
+  imports: [CommonModule, HeroComponent],
   template: `
     <!-- Hero Section -->
     <app-hero></app-hero>
@@ -32,10 +31,10 @@ import { HeroComponent } from './hero.component';
                 problems.
               </p>
               <p>
-                My approach combines technical expertise with a keen eye for
-                design, ensuring that every product I build is not only
-                functional but also intuitive and beautiful. Currently building
-                innovative payment solutions at Surfboard Payments.
+                Today I run Nuecrea, a multi-division agency building websites,
+                apps, software and AI automation, alongside branding and
+                marketing. Before that, I built payment solutions at Surfboard
+                Payments.
               </p>
             </div>
 
@@ -52,28 +51,30 @@ import { HeroComponent } from './hero.component';
                 </div>
               </div>
               <div>
-                <div class="text-3xl font-bold text-primary-600 mb-1">50+</div>
+                <div class="text-3xl font-bold text-primary-600 mb-1">Nuecrea</div>
                 <div
                   class="text-sm text-neutral-500 font-medium uppercase tracking-wider"
                 >
-                  Projects
+                  Founder
                 </div>
               </div>
               <div>
-                <div class="text-3xl font-bold text-primary-600 mb-1">100%</div>
+                <div class="text-3xl font-bold text-primary-600 mb-1">Chennai</div>
                 <div
                   class="text-sm text-neutral-500 font-medium uppercase tracking-wider"
                 >
-                  Commitment
+                  Based In
                 </div>
               </div>
             </div>
 
             <a
-              routerLink="/about"
+              href="https://nuecrea.com"
+              target="_blank"
+              rel="noopener"
               class="inline-flex items-center gap-2 text-neutral-900 font-medium hover:text-primary-600 transition-colors group"
             >
-              Learn more about me
+              Visit Nuecrea
               <svg
                 class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
                 fill="none"
@@ -99,9 +100,9 @@ import { HeroComponent } from './hero.component';
               class="relative rounded-3xl overflow-hidden shadow-2xl border border-neutral-100 bg-white"
             >
               <img
-                src="assets/about-visual.png"
-                alt="Workspace"
-                class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
+                src="mascot.png"
+                alt="Illustrated avatar of Praveen Joshua"
+                class="w-full h-auto p-12 object-contain transform hover:scale-105 transition-transform duration-700"
               />
             </div>
 
@@ -129,10 +130,10 @@ import { HeroComponent } from './hero.component';
                 </div>
                 <div>
                   <div class="text-sm font-bold text-neutral-900">
-                    Open for Work
+                    Founder, Nuecrea
                   </div>
                   <div class="text-xs text-neutral-500">
-                    Available for new projects
+                    Studio · Media · Realty
                   </div>
                 </div>
               </div>
@@ -156,28 +157,9 @@ import { HeroComponent } from './hero.component';
               A curated collection of projects where design meets engineering.
             </p>
           </div>
-          <a
-            routerLink="/projects"
-            class="hidden md:flex items-center gap-2 text-neutral-900 font-medium hover:text-primary-600 transition-colors group"
-          >
-            View all projects
-            <svg
-              class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              ></path>
-            </svg>
-          </a>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <!-- Manuscript - A Writers IDE -->
           <div class="group cursor-pointer">
             <div
@@ -318,28 +300,6 @@ import { HeroComponent } from './hero.component';
               </p>
             </div>
           </div>
-        </div>
-
-        <div class="text-center md:hidden">
-          <a
-            routerLink="/projects"
-            class="inline-flex items-center gap-2 text-neutral-900 font-medium hover:text-primary-600 transition-colors"
-          >
-            View all projects
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              ></path>
-            </svg>
-          </a>
         </div>
       </div>
     </section>
@@ -513,7 +473,7 @@ import { HeroComponent } from './hero.component';
     </section>
 
     <!-- CTA Section -->
-    <section class="py-32 relative overflow-hidden">
+    <section id="contact" class="py-32 relative overflow-hidden">
       <!-- Abstract Background -->
       <div class="absolute inset-0 bg-neutral-900">
         <div
@@ -539,24 +499,26 @@ import { HeroComponent } from './hero.component';
           <h2
             class="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight"
           >
-            Let's Build Something <br />
+            Have a project <br />
             <span
               class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400"
-              >Amazing Together</span
+              >in mind?</span
             >
           </h2>
           <p
             class="text-xl text-neutral-300 mb-12 leading-relaxed max-w-2xl mx-auto font-light"
           >
-            Whether you have a specific project in mind or just want to explore
-            what's possible, I'm always open to discussing new opportunities.
+            Client work runs through Nuecrea, my agency for software, design
+            and marketing. For anything else, say hi on LinkedIn.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              routerLink="/contact"
-              class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-600/30"
+              href="https://nuecrea.com/#contact"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white hover:text-white bg-primary-600 hover:bg-primary-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-600/30"
             >
-              Start a Project
+              Work with Nuecrea
               <svg
                 class="w-5 h-5 ml-2"
                 fill="none"
@@ -572,10 +534,12 @@ import { HeroComponent } from './hero.component';
               </svg>
             </a>
             <a
-              href="mailto:hello@example.com"
-              class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white border border-white/20 hover:bg-white/10 rounded-full transition-all duration-300 backdrop-blur-sm"
+              href="https://www.linkedin.com/in/praveenjoshua/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white hover:text-white border border-white/20 hover:bg-white/10 rounded-full transition-all duration-300 backdrop-blur-sm"
             >
-              hello&#64;example.com
+              Connect on LinkedIn
             </a>
           </div>
         </div>

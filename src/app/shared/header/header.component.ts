@@ -78,6 +78,8 @@ import { CommonModule } from '@angular/common';
             <!-- Mobile Menu Button -->
             <button
               (click)="toggleMobileMenu()"
+              [attr.aria-label]="mobileMenuOpen ? 'Close menu' : 'Open menu'"
+              [attr.aria-expanded]="mobileMenuOpen"
               class="md:hidden p-2 rounded-full hover:bg-neutral-100 transition-colors"
             >
               <svg
@@ -117,43 +119,19 @@ import { CommonModule } from '@angular/common';
               Home
             </a>
             <a
-              routerLink="/about"
-              routerLinkActive="bg-primary-50 text-primary-600"
-              (click)="closeMobileMenu()"
-              class="px-4 py-3 rounded-xl text-neutral-700 hover:bg-neutral-50 transition-colors font-medium"
-            >
-              About
-            </a>
-            <a
-              routerLink="/projects"
-              routerLinkActive="bg-primary-50 text-primary-600"
-              (click)="closeMobileMenu()"
-              class="px-4 py-3 rounded-xl text-neutral-700 hover:bg-neutral-50 transition-colors font-medium"
-            >
-              Projects
-            </a>
-            <a
-              routerLink="/blog"
-              routerLinkActive="bg-primary-50 text-primary-600"
-              (click)="closeMobileMenu()"
-              class="px-4 py-3 rounded-xl text-neutral-700 hover:bg-neutral-50 transition-colors font-medium"
-            >
-              Blog
-            </a>
-            <a
-              routerLink="/store"
-              routerLinkActive="bg-primary-50 text-primary-600"
-              (click)="closeMobileMenu()"
-              class="px-4 py-3 rounded-xl text-neutral-700 hover:bg-neutral-50 transition-colors font-medium"
-            >
-              Store
-            </a>
-            <a
               routerLink="/contact"
               (click)="closeMobileMenu()"
+              class="px-4 py-3 rounded-xl text-neutral-700 hover:bg-neutral-50 transition-colors font-medium"
+            >
+              Contact
+            </a>
+            <a
+              href="https://nuecrea.com"
+              target="_blank"
+              rel="noopener"
               class="px-4 py-3 rounded-xl bg-neutral-900 text-white text-center font-medium mt-2"
             >
-              Let's Talk
+              Nuecrea ↗
             </a>
           </div>
         </div>

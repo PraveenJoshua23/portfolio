@@ -13,15 +13,15 @@ import { CommonModule } from '@angular/common';
         <div class="grid md:grid-cols-4 gap-8 mb-8">
           <!-- Brand -->
           <div class="md:col-span-2">
-            <h3 class="text-2xl font-bold mb-4">Praveen Joshua</h3>
+            <h3 class="text-2xl font-bold text-white mb-4">Praveen Joshua</h3>
             <p class="text-neutral-400 mb-6 max-w-md">
-              Software Engineer & Designer crafting digital experiences with
-              passion and precision. Building the future, one line of code at a
-              time.
+              Software engineer, designer and founder of Nuecrea. Building
+              the future, one line of code at a time.
             </p>
             <div class="flex space-x-4">
               <a
-                href="https://github.com/praveenjoshua"
+                href="https://github.com/PraveenJoshua23"
+                aria-label="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="w-10 h-10 bg-neutral-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors"
@@ -33,7 +33,8 @@ import { CommonModule } from '@angular/common';
                 </svg>
               </a>
               <a
-                href="https://linkedin.com/in/praveenjoshua"
+                href="https://www.linkedin.com/in/praveenjoshua/"
+                aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="w-10 h-10 bg-neutral-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors"
@@ -44,45 +45,18 @@ import { CommonModule } from '@angular/common';
                   />
                 </svg>
               </a>
-              <a
-                href="https://twitter.com/praveenjoshua"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-10 h-10 bg-neutral-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors"
-              >
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
-                  />
-                </svg>
-              </a>
             </div>
           </div>
 
           <!-- Quick Links -->
           <div>
-            <h4 class="font-semibold mb-4">Quick Links</h4>
+            <h4 class="font-semibold text-white mb-4">Quick Links</h4>
             <nav class="space-y-3">
               <a
                 routerLink="/"
                 class="block text-neutral-400 hover:text-white transition-colors"
                 >Home</a
               >
-              <a
-                routerLink="/about"
-                class="block text-neutral-400 hover:text-white transition-colors"
-                >About</a
-              >
-              <a
-                routerLink="/projects"
-                class="block text-neutral-400 hover:text-white transition-colors"
-                >Projects</a
-              >
-              <!-- <a
-                routerLink="/blog"
-                class="block text-neutral-400 hover:text-white transition-colors"
-                >Blog</a
-              > -->
               <a
                 routerLink="/contact"
                 class="block text-neutral-400 hover:text-white transition-colors"
@@ -91,34 +65,30 @@ import { CommonModule } from '@angular/common';
             </nav>
           </div>
 
-          <!-- Services -->
+          <!-- Nuecrea -->
           <div>
-            <h4 class="font-semibold mb-4">Services</h4>
+            <h4 class="font-semibold text-white mb-4">Nuecrea</h4>
             <nav class="space-y-3">
-              <!-- <a
-                routerLink="/store"
-                class="block text-neutral-400 hover:text-white transition-colors"
-                >Digital Store</a
-              > -->
               <a
-                href="#"
+                href="https://nuecrea.com/studio"
+                target="_blank"
+                rel="noopener"
                 class="block text-neutral-400 hover:text-white transition-colors"
-                >Development</a
+                >Studio</a
               >
               <a
-                href="#"
+                href="https://nuecrea.com/media"
+                target="_blank"
+                rel="noopener"
                 class="block text-neutral-400 hover:text-white transition-colors"
-                >Design</a
+                >Media</a
               >
               <a
-                href="#"
+                href="https://nuecrea.com/realty"
+                target="_blank"
+                rel="noopener"
                 class="block text-neutral-400 hover:text-white transition-colors"
-                >Consulting</a
-              >
-              <a
-                href="#"
-                class="block text-neutral-400 hover:text-white transition-colors"
-                >Analytics</a
+                >Realty</a
               >
             </nav>
           </div>
@@ -126,23 +96,11 @@ import { CommonModule } from '@angular/common';
 
         <!-- Bottom Bar -->
         <div
-          class="border-t border-neutral-800 pt-8 flex flex-col md:flex-row justify-between items-center"
+          class="border-t border-neutral-800 pt-8 flex justify-center"
         >
-          <p class="text-neutral-400 text-sm mb-4 md:mb-0">
+          <p class="text-neutral-400 text-sm">
             © {{ currentYear }} Praveen Joshua. All rights reserved.
           </p>
-          <div class="flex space-x-6 text-sm">
-            <a
-              href="#"
-              class="text-neutral-400 hover:text-white transition-colors"
-              >Privacy Policy</a
-            >
-            <a
-              href="#"
-              class="text-neutral-400 hover:text-white transition-colors"
-              >Terms of Service</a
-            >
-          </div>
         </div>
       </div>
     </footer>
