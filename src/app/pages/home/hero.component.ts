@@ -57,32 +57,5 @@ import { RouterLink } from '@angular/router';
       </div>
     </section>
   `,
-  styles: [
-    `
-      .rise {
-        animation: rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
-      }
-      .fade {
-        animation: fade 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-      }
-      @keyframes rise {
-        from {
-          transform: translateY(100%);
-        }
-      }
-      @keyframes fade {
-        from {
-          opacity: 0;
-          transform: translateY(1.5rem);
-        }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .rise,
-        .fade {
-          animation: none;
-        }
-      }
-    `,
-  ],
 })
 export class HeroComponent {}
